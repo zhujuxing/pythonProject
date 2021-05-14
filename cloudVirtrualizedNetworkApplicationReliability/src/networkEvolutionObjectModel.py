@@ -81,6 +81,18 @@ class CloudVirtualizedNetwork(nx.Graph):
         node_info['State'] = 1
         node_info['Idle'] = [1 if i == "空闲" else 0 for i in node_info['NodeFunction']]
 
+        vnf_info['VNFDeployNode'] = vnf_info['VNFDeployNode'].apply(str.split, args=[','])
+
+        # application_info['ApplicationVNFs'] = application_info['ApplicationVNFs'].apply(str.split, args=[','])
+        # app_bandawidth_ration = []
+        # app_work_path = []
+        # for row in application_info.iterrows():
+        #     application_vnfs_list = row[1]['ApplicationVNFs']
+        #     for i in range(len(application_vnfs_list) - 1):
+        #         vnf_pre = application_vnfs_list[i]
+        #         vnf_suc = application_vnfs_list[i + 1]
+        #         vnf_pre_num = vnf_info.
+
         self.graph['node_info'] = node_info
         self.graph['edge_info'] = edge_info
         self.graph['vnf_info'] = vnf_info
@@ -91,13 +103,13 @@ class CloudVirtualizedNetwork(nx.Graph):
 
     def __str__(self):
         string = "----------------节点信息---------------\n" \
-                 + str(self.graph['node_info']) + "\n"\
+                 + str(self.graph['node_info']) + "\n" \
                  + "----------------链路信息---------------\n" \
-                 + str(self.graph['edge_info']) + "\n"\
+                 + str(self.graph['edge_info']) + "\n" \
                  + "----------------故障信息---------------\n" \
-                 + str(self.graph['fail_info']) + "\n"\
+                 + str(self.graph['fail_info']) + "\n" \
                  + "----------------vnf信息---------------\n" \
-                 + str(self.graph['vnf_info']) + "\n"\
+                 + str(self.graph['vnf_info']) + "\n" \
                  + "----------------业务信息---------------\n" \
                  + str(self.graph['application_info']) + "\n"
         return string
@@ -106,6 +118,7 @@ class CloudVirtualizedNetwork(nx.Graph):
         print("网络对象已销毁")
 
 
+# --------------------------测试函数区-----------------------------------
 def test():
     # file =
     file = os.path.abspath(os.path.dirname(os.getcwd()) + os.path.sep + ".") + os.sep + 'inputFiles' + os.sep + \
